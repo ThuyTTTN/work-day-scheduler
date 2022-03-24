@@ -1,71 +1,46 @@
 // header date
 $("#currentDay").text(moment().format("LLLL"));
 
-
-
-
-    
-// !!This works!!  Able to enter text 
-//get current text of p element and create a new textarea so user can enter tasks
-// $(".list-task").on("click", "p", function(){
-//     //get current text of p element
-//     var text = $(this)
-//     .text()
-//     .trim();
-
-//     // create new textarea by replacing 'p'
-//     var textInput = $("<textarea>")
-//     .addClass("text-box")
-//     .val(text);
-//     $(this).replaceWith(textInput);
-// });
-
+// localStorage the hr id and description text
 $(document).ready(function() {
     // saveBtn on click  
     $(".saveBtn").on("click", function () {
         // Get values of the description in jQuery
-        var text = $(this).siblings(".list-task").val();
+        var text = $(this).siblings(".description").val();
         var time = $(this).parent().attr("id");
 
         // Save text in localStorage
         localStorage.setItem(time, text);
     });
-});
- 
 
-    // loop over time blocks
-    // $(".time-block").each(function() {
-    //     var blockTime = parseInt($(this).attr("id").split("hour")[1]);
+    function trackTime() {
+        //get current number hours
+        var currentTime = moment().hour();
+        console.log(currentTime);
 
+        // loop time blocks
+        $(".time-block").each(function() {
+            var blockHr = parseInt($(this).attr("id").split("hour")[1]);
+            console.log(blockHr, currentTime);
 
-        // To check the time and add the classes for background indicators
-    //     if (blockTime < timeNow) {
-    //         $(this).removeClass("future");
-    //         $(this).removeClass("present");
-    //         $(this).addClass("past");
-    //     }
-    //     else if (blockTime === timeNow) {
-    //         $(this).removeClass("past");
-    //         $(this).removeClass("future");
-    //         $(this).addClass("present");
-    //     }
-    //     else {
-    //         $(this).removeClass("present");
-    //         $(this).removeClass("past");
-    //         $(this).addClass("future");
-    //     }
-    // })
+            //check time:  conditional statement
+            if (blockHr < currentTime) {
+                $(this).addClass("past");
+                $(this).removeClass("future");
+                $(this).removeClass("present");
+            }
+            else if (blockHr === currentTime) {
+                $(this).removeClass("past");
+                $(this).addClass("present");
+                $(this).removeClass("future");
+            }
+            else {
+                $(this).removeClass("present");
+                $(this).removeClass("past");
+                $(this).addClass("future");
+            }
+        })
+    }
+    trackTime();
+})
 
-
-
-
-
-
-
-
-
-
-// $(".saveBtn").click(function() {
-//     var taskText = $(this).siblings(".list-task").val();
-//     saveTasks();
-// })
