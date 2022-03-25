@@ -1,6 +1,7 @@
 // header date
 $("#currentDay").text(moment().format("LLLL"));
 
+
 // localStorage the hr id and description text
 $(document).ready(function() {
     // saveBtn on click  
@@ -11,7 +12,9 @@ $(document).ready(function() {
 
         // Save text in localStorage
         localStorage.setItem(time, text);
+        
     });
+
 
     function trackTime() {
         //get current number hours
@@ -20,7 +23,7 @@ $(document).ready(function() {
 
         // loop time blocks
         $(".time-block").each(function() {
-            var blockHr = parseInt($(this).attr("id").split("hour")[1]);
+            var blockHr = parseInt($(this).attr("id").split("hr")[1]);
             console.log(blockHr, currentTime);
 
             //check time:  conditional statement
@@ -44,3 +47,13 @@ $(document).ready(function() {
     trackTime();
 })
 
+// get value from localStorage; still displayed upon page refresh
+$("#hr9 .description").val(localStorage.getItem("hr9"));
+$("#hr10 .description").val(localStorage.getItem("hr10"));
+$("#hr11 .description").val(localStorage.getItem("hr11"));
+$("#hr12 .description").val(localStorage.getItem("hr12"));
+$("#hr13 .description").val(localStorage.getItem("hr13"));
+$("#hr14 .description").val(localStorage.getItem("hr14"));
+$("#hr15 .description").val(localStorage.getItem("hr15"));
+$("#hr16 .description").val(localStorage.getItem("hr16"));
+$("#hr17 .description").val(localStorage.getItem("hr17"));
